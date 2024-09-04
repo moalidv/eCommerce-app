@@ -11,14 +11,14 @@ const Header = () => {
       <div className={headerContainer}>
         <h1 className={headerLogo}>
           <span>Our </span>
-          <Badge bg="info">Badge</Badge>
+          <Badge bg="info">eCom</Badge>
         </h1>
         <HeaderBasket />
       </div>
 
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/">eCommerce</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

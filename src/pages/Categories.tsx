@@ -1,52 +1,21 @@
+import { GridList, Heading } from "@components/common";
 import { Category } from "@components/ecommerce";
-import { actGetCategories } from "@store/categories/categoriesSlice";
-import { useAppDispatch, useAppSelector } from "@store/hook";
-import { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import Loading from "@components/feedback/loading/Loading";
+import useCategories from "@hooks/useCategories";
+import { Container } from "react-bootstrap";
 
 const Categories = () => {
-  const { records, loading, error } = useAppSelector(
-    (state) => state.categories
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!records.length) {
-      dispatch<any>(actGetCategories());
-    }
-  }, [dispatch]);
-
-  const getCat =
-    records.length > 0 &&
-    records.map((c) => {
-      return (
-        <Col
-          key={c.id}
-          xs={3}
-          className="d-flex justify-content-center mb-5 mt-2"
-        >
-          <Category {...c} />
-        </Col>
-      );
-    });
+  const { error, loading, records } = useCategories();
 
   return (
     <Container>
-      <Row>
-        {getCat}
-        {/* <Col xs={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col> */}
-      </Row>
+      <Heading title="Categories" />
+      <Loading loading={loading} error={error}>
+        <GridList
+          records={records}
+          renderItem={(record) => <Category {...record} />}
+        />
+      </Loading>
     </Container>
   );
 };

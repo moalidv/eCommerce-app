@@ -4,7 +4,7 @@ const { footerContainer } = styles;
 
 const Footer = () => {
   return (
-    <div className={footerContainer}>c 2024 Our Ecom. All rights reserved.</div>
+    <div className={footerContainer}>c 2024 Our eCom. All rights reserved.</div>
   );
 };
 
