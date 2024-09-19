@@ -11,15 +11,3 @@ export const getCartTotalQuantitySelector = createSelector(
     );
   }
 );
-
-export const getWishlistTotalQuantitySelector = createSelector(
-  (state: RootState) => state.wishlist.itemsId,
-  (items) => {
-    // return (
-    //   (Object.values(items).length > 0 &&
-    //     Object.values(items).reduce((a, b) => a + b)) ||
-    //   0
-    // );
-    return items.length > 0 ? items.length : 0;
-  }
-);

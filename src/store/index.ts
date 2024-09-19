@@ -1,4 +1,4 @@
-import { ICartState } from "@customTypes/cart";
+import { ICartState } from "@types";
 import {
   combineReducers,
   configureStore,
@@ -18,6 +18,19 @@ import storage from "redux-persist/lib/storage";
 import cart from "./cart/cartSlice";
 import categories, { ICategoriesState } from "./categories/categoriesSlice";
 import products, { IProducts } from "./products/productsSlice";
+import auth, { IAuthState } from "./auth/authSlice";
+
+const rootPersistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["auth", "cart"],
+};
+
+const authPersistConfig = {
+  key: "auth",
+  storage,
+  whitelist: ["user", "accessToken"],
+};
 
 const cartPersistConfig = {
   key: "cart",
@@ -26,17 +39,21 @@ const cartPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, auth),
   categories,
   products,
   cart: persistReducer(cartPersistConfig, cart),
 });
 
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
+
 const store: EnhancedStore<{
   categories: ICategoriesState;
   products: IProducts;
   cart: ICartState;
+  auth: IAuthState;
 }> = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

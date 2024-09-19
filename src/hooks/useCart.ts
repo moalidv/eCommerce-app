@@ -5,18 +5,19 @@ import {
   cleanupCartProductsFullInfo,
 } from "@store/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const useCart = () => {
   const dispatch = useAppDispatch();
   const { items, productsFullInfo, loading, error } = useAppSelector(
     (state) => state.cart
   );
-
+  console.log("products full info", productsFullInfo);
   const products = productsFullInfo.map((el) => ({
     ...el,
     quantity: items[el.id as number],
   }));
+  console.log(products);
 
   const changeQuantityHandler = useCallback(
     (id: number, quantity: number) => {
@@ -33,10 +34,11 @@ const useCart = () => {
   );
 
   useEffect(() => {
-    dispatch<any>(actGetProductsByItems());
+    const promise = dispatch<any>(actGetProductsByItems());
 
     return () => {
       dispatch(cleanupCartProductsFullInfo());
+      promise.abort();
     };
   }, [dispatch]);
   return { error, loading, products, changeQuantityHandler, removeItemHandler };

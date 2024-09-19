@@ -1,5 +1,4 @@
-import { TProduct } from "@customTypes/product";
-import { TLoading } from "@customTypes/shared";
+import { TProduct, TLoading, isString } from "@types";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
 
@@ -39,7 +38,10 @@ export const productsSlice = createSlice({
       //   state.error = action.payload;
 
       // }
-      state.error = action.payload as string;
+      // state.error = action.payload as string;
+      if (isString(action.payload)) {
+        state.error = action.payload;
+      }
     });
   },
 });

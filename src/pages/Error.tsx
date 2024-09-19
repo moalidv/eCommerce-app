@@ -1,3 +1,5 @@
+import Lottie from "lottie-react";
+import notFound from "@assets/lottifiles/notFound.json";
 import { Container } from "react-bootstrap";
 import { Link, useRouteError, isRouteErrorResponse } from "react-router-dom";
 
@@ -16,10 +18,9 @@ const Error = () => {
 
   return (
     <Container className="notFound">
-      <h1>{errorStatus}</h1>
-      <p>{errorText}</p>
+      <Lottie style={{ width: "40%" }} animationData={notFound} />
       <Link to="/" replace={true}>
-        Back to Home
+        How about going back to saftey??
       </Link>
     </Container>
   );

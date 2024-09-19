@@ -10,7 +10,7 @@ const Categories = () => {
   return (
     <Container>
       <Heading title="Categories" />
-      <Loading loading={loading} error={error}>
+      <Loading loading={loading} error={error} type="category">
         <GridList
           records={records}
           renderItem={(record) => <Category {...record} />}

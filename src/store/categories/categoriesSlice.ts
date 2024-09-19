@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetCategories from "./act/actGetCategories";
-import { TLoading } from "@customTypes/shared";
-import { TCategory } from "@customTypes/category";
+import { isString, TCategory, TLoading } from "@types";
 
 export interface ICategoriesState {
   records: TCategory[];
@@ -43,7 +42,10 @@ const categoriesSlice = createSlice({
       // if (action.payload && typeof action.payload == "string") {
       //   state.error = action.payload;
       // }
-      state.error = action.payload as string;
+      // state.error = action.payload as string;
+      if (isString(action.payload)) {
+        state.error = action.payload;
+      }
     });
   },
 });

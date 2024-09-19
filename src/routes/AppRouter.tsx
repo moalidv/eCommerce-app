@@ -8,11 +8,12 @@ import { MainLayout } from "@layouts/index";
 const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Cart = lazy(() => import("@pages/Cart"));
 const Categories = lazy(() => import("@pages/Categories"));
-const Error = lazy(() => import("@pages/Error"));
 const Home = lazy(() => import("@pages/Home"));
 const Login = lazy(() => import("@pages/Login"));
 const Products = lazy(() => import("@pages/Products"));
 const Register = lazy(() => import("@pages/Register"));
+const Profile = lazy(() => import("@pages/Profile"));
+import Error from "@pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback="loading please wait...">
             <Register />
+          </Suspense>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <Suspense fallback="loading please wait...">
+            <Profile />
           </Suspense>
         ),
       },

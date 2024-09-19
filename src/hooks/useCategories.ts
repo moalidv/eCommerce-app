@@ -3,7 +3,7 @@ import {
   cleanUpCategoryRecords,
 } from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const useCategories = () => {
   const { records, loading, error } = useAppSelector(
@@ -12,12 +12,12 @@ const useCategories = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!records.length) {
-      dispatch<any>(actGetCategories());
-    }
+    if (records.length) return;
+    const promise = dispatch<any>(actGetCategories());
 
     return () => {
       dispatch(cleanUpCategoryRecords());
+      promise.abort();
     };
   }, [dispatch]);
   return { loading, error, records };

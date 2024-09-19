@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+.notFound > :first-child {
+  text-align: center;
+  margin: 5rem auto;
+}
+
 .notFound h1 {
   font-size: 130px;
 }

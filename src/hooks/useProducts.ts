@@ -21,9 +21,12 @@ const useProducts = () => {
     //   prefix = params.prefix;
     //   dispatch<any>(actGetProductsByCatPrefix(prefix));
     // }
-    dispatch<any>(actGetProductsByCatPrefix(params.prefix as string));
+    const promise = dispatch<any>(
+      actGetProductsByCatPrefix(params.prefix as string)
+    );
     return () => {
       productsCleanUp();
+      promise.abort();
     };
   }, [dispatch, params]);
 
